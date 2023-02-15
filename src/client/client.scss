@@ -1,0 +1,13 @@
+.container {
+  width: 100%;
+  height: 100%;
+  background: orange;
+  position: relative;
+}
+
+.cursor {
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  background: blue;
+}
