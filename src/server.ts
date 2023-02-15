@@ -11,11 +11,14 @@ const io = socketIo(server, {
     }
 });
 
+const events = {}
+
 io.on('connection', (socket) => {
     console.log('New user connected');
 
     socket.on('message', (data) => {
-        io.emit('message', data);
+        events[data[0]] = data;
+        io.emit('message', events);
     });
 
     socket.on('disconnect', () => {

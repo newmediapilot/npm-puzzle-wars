@@ -2,13 +2,15 @@ import io from 'socket.io-client';
 
 const socket = io('ws://localhost:3000', {transports: ['polling']});
 
-const cursor = document.querySelector('.cursor');
+const cursor = document.querySelectorAll('.cursor');
 
 socket.on('message', (data) => {
-    if (socket.id === data[0]) {
-        cursor.style.left = `${data[1]}px`;
-        cursor.style.top = `${data[2]}px`;
-    }
+    Object.keys(data).forEach((id, index) => {
+        if (!!id) {
+            cursor[index].style.left = `${data[id][1]}px`;
+            cursor[index].style.top = `${data[id][2]}px`;
+        }
+    });
 });
 
 window.addEventListener('mousemove', (event) => {
