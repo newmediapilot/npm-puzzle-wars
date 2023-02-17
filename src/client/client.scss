@@ -3,7 +3,15 @@ html, body {
   padding: 0;
 }
 
-.container {
+.board {
+  width: 100%;
+  height: 100%;
+  background: orange;
+  position: relative;
+}
+
+
+.board-inner {
   width: 100%;
   height: 100%;
   background: orange;

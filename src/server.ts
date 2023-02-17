@@ -14,16 +14,20 @@ const io = socketIo(server, {
 const events = {}
 
 io.on('connection', (socket) => {
-    console.log('New user connected');
+
+    events[socket.id] = true;
 
     socket.on('message', (data) => {
         events[data[0]] = data;
-        io.emit('message', events);
     });
 
     socket.on('disconnect', () => {
-        console.log('User disconnected');
+        delete events[socket.id];
     });
+
+    setInterval(() => {
+        io.emit('message', events);
+    }, 1000 / 15);
 });
 
 server.listen(3000, () => {
