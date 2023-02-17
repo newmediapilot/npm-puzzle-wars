@@ -4,18 +4,18 @@ html, body {
 }
 
 .board {
-  width: 100%;
-  height: 100%;
-  background: orange;
+  width: 100vw;
+  height: 100vh;
   position: relative;
+  box-shadow: 0 0 0 6px inset blue;
 }
 
 
 .board-inner {
   width: 100%;
   height: 100%;
-  background: orange;
   position: relative;
+  box-shadow: 0 0 0 3px inset purple;
 }
 
 .cursor {
@@ -23,4 +23,5 @@ html, body {
   height: 20px;
   position: absolute;
   background: blue;
+  transition: all 333ms linear;
 }

@@ -1,3 +1,5 @@
+import {Board} from './server/board';
+
 const http = require('http');
 const socketIo = require('socket.io');
 
@@ -11,23 +13,23 @@ const io = socketIo(server, {
     }
 });
 
-const events = {}
+const board = new Board();
 
 io.on('connection', (socket) => {
 
-    events[socket.id] = true;
+    board.setEvent([socket.id, 0, 0, false]);
 
     socket.on('message', (data) => {
-        events[data[0]] = data;
+        board.setEvent(data);
     });
 
     socket.on('disconnect', () => {
-        delete events[socket.id];
+        board.clearEvent(socket.id);
     });
 
     setInterval(() => {
-        io.emit('message', events);
-    }, 1000 / 15);
+        io.emit('message', board.getEvents());
+    }, 1000/60);
 });
 
 server.listen(3000, () => {

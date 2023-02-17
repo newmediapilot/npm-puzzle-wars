@@ -3,11 +3,11 @@ import io from 'socket.io-client';
 const socket = io('ws://localhost:3000', {transports: ['polling']});
 
 const cursorEl = document.querySelector('.cursor').cloneNode();
-const containerEl = document.querySelector('.container');
+const containerEl = document.querySelector('.board-inner');
 
 socket.on('message', (data) => {
+    console.log('helllo', data);
     containerEl.innerHTML = '';
-    console.log('data', data);
     Object.keys(data).forEach((id, index) => {
         if (id) {
             const cursorClone = cursorEl.cloneNode();
