@@ -1,16 +1,36 @@
 export class Board {
 
-    private _events = {};
+    //
+    private _pieces: any = [];
 
-    public setEvent(data: any) {
-        this._events[data[0]] = data;
+    // across, own, width, height
+    constructor({a, d, w, h}) {
+        this.build(a, d, w, h);
     }
 
-    public getEvents() {
-        return this._events;
+    getPieces() {
+        return this._pieces;
     }
 
-    public clearEvent(data: any) {
-        delete this._events[data[0]];
+    // creates the virtual board of pieces
+    private build(
+        across,
+        down,
+        width,
+        height,
+    ) {
+        for (let a = 0; a < down; a++) {
+            for (let d = 0; d < across; d++) {
+                this._pieces.push({
+                    lS: a * width,    // left solve
+                    tS: d * height,   // top solve
+                    lC: a * width,    // left current
+                    tC: d * height,   // top current
+                    d: false,         // dragging?
+                    w: width,         // width
+                    h: height,        // height
+                })
+            }
+        }
     }
 }

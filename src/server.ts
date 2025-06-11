@@ -1,4 +1,4 @@
-import {Board} from './server/board';
+import {App} from './server/app';
 
 const http = require('http');
 const socketIo = require('socket.io');
@@ -13,11 +13,16 @@ const io = socketIo(server, {
     }
 });
 
-const board = new Board();
+const board = new App();
 
 io.on('connection', (socket) => {
 
-    board.setEvent([socket.id, 0, 0, false]);
+    board.createBoard({
+        a: 5,
+        d: 5,
+        w: 50,
+        h: 50,
+    });
 
     socket.on('message', (data) => {
         board.setEvent(data);
@@ -29,7 +34,7 @@ io.on('connection', (socket) => {
 
     setInterval(() => {
         io.emit('message', board.getEvents());
-    }, 1000/60);
+    }, 1000/30);
 });
 
 server.listen(3000, () => {

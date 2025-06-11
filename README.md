@@ -1,3 +1,9 @@
+# Puzzle Wars
+
+This is a game where users assemble a puzzle in a competitive style.
+The person to get the most pieces on the board wins - 
+the other person can use power-ups to distract the opponent.
+
 # Server design
 
 1. User logs into a session ex. localhost/8fh3jdks
